@@ -1,0 +1,4 @@
+import site from '../site.json';
+import {getCollection} from 'astro:content';
+const esc=(s:string)=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+export async function GET(){const posts=site.launchReady?(await getCollection('guides',({data})=>!data.draft&&data.reviewed&&data.language==='ko'&&data.sources.length>0)):[];const items=posts.map(p=>{const url=new URL('/guides/'+p.id+'/',site.url).href;return '<item><title>'+esc(p.data.title)+'</title><link>'+esc(url)+'</link><description>'+esc(p.data.description)+'</description><pubDate>'+p.data.pubDate.toUTCString()+'</pubDate></item>';}).join('');return new Response('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>GuideHollow</title><link>'+esc(site.url)+'</link><description>'+esc(site.description)+'</description><language>ko-KR</language>'+items+'</channel></rss>',{headers:{'Content-Type':'application/rss+xml; charset=utf-8'}});}

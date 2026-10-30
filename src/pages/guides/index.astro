@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import site from '../../site.json';
+import {getCollection} from 'astro:content';
+const posts=(await getCollection('guides',({data})=>site.launchReady&&!data.draft&&data.reviewed&&data.language==='ko'&&data.sources.length>0)).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+---
+<Layout title={site.section+' 가이드 | GuideHollow'} robots={posts.length?'index,follow':'noindex,follow'}><div class="wrap content"><p class="eyebrow">GuideHollow</p><h1>{site.section} 가이드</h1><p>공식 자료와 검수를 통과한 자세한 글을 모았습니다.</p>{posts.length?<ul>{posts.map(p=><li><a href={'/guides/'+p.id+'/'}>{p.data.title}</a></li>)}</ul>:<p>아직 공개된 자세한 글이 없습니다. 홈페이지의 단계별 점검부터 시작하세요.</p>}</div></Layout>
