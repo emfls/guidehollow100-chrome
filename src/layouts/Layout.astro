@@ -6,6 +6,7 @@ const canonical=new URL(Astro.url.pathname,site.url).href;
 const schema=JSON.stringify({'@context':'https://schema.org','@type':'WebSite',name:'GuideHollow',inLanguage:'ko-KR',url:site.url,description:site.description}).replace(/</g,'\\u003c');
 ---
 <!doctype html><html lang="ko"><head>
+<meta name="naver-site-verification" content="fcf5ea5c6e3f66cd24769c7646e6557c1750ad81" />
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>{title}</title><meta name="description" content={description}/><meta name="robots" content={robots}/>
 <link rel="canonical" href={canonical}/><link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
