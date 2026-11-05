@@ -1,4 +1,5 @@
 ---
+import CoupangBanner from '../components/CoupangBanner.astro';
 import Layout from '../layouts/Layout.astro';
 import site from '../site.json';
 import guide from '../launch-content.json';
@@ -6,6 +7,8 @@ import {getCollection} from 'astro:content';
 const posts=(await getCollection('guides',({data})=>site.launchReady&&!data.draft&&data.reviewed&&data.language==='ko'&&data.sources.length>0)).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
 ---
 <Layout><section class="hero"><div class="wrap"><p class="eyebrow">GuideHollow / {site.section}</p><h1>{site.hero}</h1><p class="lead">{site.description}</p><p>{guide.intro}</p><a href="#checks" class="button">상황별 점검 보기</a></div></section>
+<CoupangBanner placement="home"/>
+
 <section class="wrap section" id="checks"><h2>지금 필요한 해결 순서</h2><p class="muted">문제에 가까운 항목을 선택해 작은 변경부터 확인하세요.</p>
 <div class="grid">{guide.checks.map((item,i)=><section class="card"><p class="eyebrow">점검 {String(i+1).padStart(2,'0')}</p><h3>{item.title}</h3><p>{item.when}</p><ol>{item.steps.map(step=><li>{step}</li>)}</ol><p class="tip">{item.tip}</p></section>)}</div></section>
 <section class="wrap section"><div class="callout"><h2>확인 전 안내</h2><p>제품 규격과 정책, 최신 이용 조건은 제조사 및 공식 기관의 안내를 우선 확인하세요. 아래 내용은 일반적인 1차 점검 순서이며 개별 상황의 전문 상담을 대체하지 않습니다.</p></div></section>

@@ -1,5 +1,4 @@
 ---
-import CoupangBanner from '../components/CoupangBanner.astro';
 import site from '../site.json';
 import '../styles/main.css';
 const {title=site.pageTitle,description=site.description,robots=site.launchReady?'index,follow':'noindex,follow'}=Astro.props;
@@ -16,6 +15,6 @@ const schema=JSON.stringify({'@context':'https://schema.org','@type':'WebSite',n
 <script type="application/ld+json" set:html={schema}/>
 </head><body style={'--accent:'+site.accent}><a href="#main" class="skip">본문으로 이동</a>
 <header class="top"><div class="wrap bar"><a href="/" class="brand"><span class="mark">G</span>GuideHollow</a><nav aria-label="주요 메뉴"><a href="/">홈</a><a href="/guides/">가이드</a><a href="/about/">소개</a><a href="/editorial/">편집 원칙</a></nav></div></header>
-<main id="main"><slot/></main>{site.launchReady && site.coupangEnabled && !['/privacy/','/disclosure/','/404/'].includes(Astro.url.pathname) && <CoupangBanner/>}
+<main id="main"><slot/></main>
 <footer class="foot"><div class="wrap"><strong>GuideHollow</strong><p>생활 속 문제를 이해하고 직접 점검하는 한국어 안내</p><nav><a href="/privacy/">개인정보 안내</a><a href="/disclosure/">광고·제휴 안내</a><a href="/rss.xml">RSS</a></nav><small>© {new Date().getFullYear()} GuideHollow · 공식 기관 또는 제조사 웹사이트가 아닙니다.</small></div></footer>
 </body></html>
