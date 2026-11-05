@@ -11,5 +11,5 @@ export async function getStaticPaths(){
 const {post}=Astro.props;
 const {Content}=await render(post);
 ---
-<Layout title={post.data.title+' | GuideHollow'} description={post.data.description}><article class="wrap content"><a href="/guides/">가이드 목록</a><p class="eyebrow">{site.section} / {post.data.category}</p><h1>{post.data.title}</h1><p>{post.data.description}</p><Content/>
+<Layout coupangInPage={true} title={post.data.title+' | GuideHollow'} description={post.data.description}><article class="wrap content"><a href="/guides/">가이드 목록</a><p class="eyebrow">{site.section} / {post.data.category}</p><h1>{post.data.title}</h1><p>{post.data.description}</p><Content/>
 <CoupangBanner placement="article"/><h2>공식 참고 자료</h2><ul class="ref-list">{post.data.sources.map(url=><li><a href={url} target="_blank" rel="noopener noreferrer">{url}</a></li>)}</ul></article></Layout>

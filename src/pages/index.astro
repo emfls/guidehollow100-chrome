@@ -6,7 +6,7 @@ import guide from '../launch-content.json';
 import {getCollection} from 'astro:content';
 const posts=(await getCollection('guides',({data})=>site.launchReady&&!data.draft&&data.reviewed&&data.language==='ko'&&data.sources.length>0)).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
 ---
-<Layout><section class="hero"><div class="wrap"><p class="eyebrow">GuideHollow / {site.section}</p><h1>{site.hero}</h1><p class="lead">{site.description}</p><p>{guide.intro}</p><a href="#checks" class="button">상황별 점검 보기</a></div></section>
+<Layout coupangInPage={true}><section class="hero"><div class="wrap"><p class="eyebrow">GuideHollow / {site.section}</p><h1>{site.hero}</h1><p class="lead">{site.description}</p><p>{guide.intro}</p><a href="#checks" class="button">상황별 점검 보기</a></div></section>
 <CoupangBanner placement="home"/>
 
 <section class="wrap section" id="checks"><h2>지금 필요한 해결 순서</h2><p class="muted">문제에 가까운 항목을 선택해 작은 변경부터 확인하세요.</p>
