@@ -9,5 +9,6 @@
   "url": "https://chrome.guidehollow.com/",
   "accent": "#2766C0",
   "launchReady": true,
-  "adsReady": false
+  "adsReady": false,
+  "coupangEnabled": true
 }
