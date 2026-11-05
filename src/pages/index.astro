@@ -1,18 +1,9 @@
 ---
-import CoupangBanner from '../components/CoupangBanner.astro';
 import Layout from '../layouts/Layout.astro';
+import CoupangBanner from '../components/CoupangBanner.astro';
+import Tool from '../utility/Tool.astro';
+import {tools} from '../utility/catalog.mjs';
 import site from '../site.json';
-import guide from '../launch-content.json';
-import {getCollection} from 'astro:content';
-const posts=(await getCollection('guides',({data})=>site.launchReady&&!data.draft&&data.reviewed&&data.language==='ko'&&data.sources.length>0)).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+const tool=tools.find(t=>t.slug===site.slug);
 ---
-<Layout coupangInPage={true}><section class="hero"><div class="wrap"><p class="eyebrow">GuideHollow / {site.section}</p><h1>{site.hero}</h1><p class="lead">{site.description}</p><p>{guide.intro}</p><a href="#checks" class="button">상황별 점검 보기</a></div></section>
-<CoupangBanner placement="home"/>
-
-<section class="wrap section" id="checks"><h2>지금 필요한 해결 순서</h2><p class="muted">문제에 가까운 항목을 선택해 작은 변경부터 확인하세요.</p>
-<div class="grid">{guide.checks.map((item,i)=><section class="card"><p class="eyebrow">점검 {String(i+1).padStart(2,'0')}</p><h3>{item.title}</h3><p>{item.when}</p><ol>{item.steps.map(step=><li>{step}</li>)}</ol><p class="tip">{item.tip}</p></section>)}</div></section>
-<section class="wrap section"><div class="callout"><h2>확인 전 안내</h2><p>제품 규격과 정책, 최신 이용 조건은 제조사 및 공식 기관의 안내를 우선 확인하세요. 아래 내용은 일반적인 1차 점검 순서이며 개별 상황의 전문 상담을 대체하지 않습니다.</p></div></section>
-<section class="wrap section"><h2>자주 묻는 질문</h2>{guide.faq.map(q=><section class="faq"><h3>{q.question}</h3><p>{q.answer}</p></section>)}</section>
-<section class="wrap section"><h2>공식 정보 확인</h2><p class="muted">제품·서비스별 조건은 아래 기관에서 확인하세요.</p><ul class="ref-list">{guide.references.map(r=><li><a href={r.url} target="_blank" rel="noopener noreferrer">{r.label}</a></li>)}</ul></section>
-<section class="wrap section"><h2>자세한 가이드</h2>{posts.length?<ul>{posts.map(p=><li><a href={'/guides/'+p.id+'/'}>{p.data.title}</a></li>)}</ul>:<p class="muted">상세 원고는 공식 자료 검수와 발행 승인을 마친 뒤 등록합니다.</p>}</section>
-</Layout>
+<Layout coupangInPage={true}><Tool tool={tool}/><CoupangBanner placement="home"/></Layout>
